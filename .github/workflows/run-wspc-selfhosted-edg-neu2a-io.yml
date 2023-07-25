@@ -1,0 +1,95 @@
+name: neu2a yocto Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: neu2a yocto Build
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Prepare workspace
+        id: prepare_workspace
+        run: |
+          export LC_ALL="en_US.UTF-8"
+          pwd
+          ls
+
+        # Set up the build directory in the runner's workspace
+      - name: Set up build directory
+        run: |
+          mkdir -p ${{ runner.workspace }}/neu2aYctBuild
+          cp -r * ${{ runner.workspace }}/neu2aYctBuild/
+        continue-on-error: true
+
+      - name: Change to neu2aYctBuild directory
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+
+      - name: Clone Yocto Poky repository
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          if [ ! -d "neu2aYctBuild/poky" ]; then
+            git clone git://git.yoctoproject.org/poky.git  
+          fi
+
+      - name: Clone bitbake repository
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          if [ ! -d "neu2aYctBuild/bitbake" ]; then
+            git clone git://git.openembedded.org/bitbake -b master 
+          fi
+
+      - name: Clone openembedded-core repository
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          if [ ! -d "neu2aYctBuild/openembedded-core" ]; then
+            git clone git://git.openembedded.org/openembedded-core -b kirkstone  
+          fi
+
+      - name: Clone meta-arm repository
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          if [ ! -d "neu2aYctBuild/meta-arm" ]; then
+            git clone git://git.yoctoproject.org/meta-arm -b kirkstone  
+          fi
+
+      - name: Clone meta-openembedded repository
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          if [ ! -d "neu2aYctBuild/meta-openembedded" ]; then
+            git clone git://git.openembedded.org/meta-openembedded -b kirkstone  
+          fi
+
+      - name: Clone meta-neu6b repo
+        run: | 
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          if [ ! -d "neu2aYctBuild/meta-neu6b" ]; then
+            git clone https://github.com/manojams/meta-neu6b.git -b kirkstone 
+          fi
+
+
+      - name: setup the local.conf
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          source openembedded-core/oe-init-build-env build
+          echo 'MACHINE ??= "neu2a-io"' >> conf/local.conf
+
+      - name: Update bblayers.conf
+        run: |
+          cd ${{ runner.workspace }}/neu2aYctBuild
+          source openembedded-core/oe-init-build-env build
+          export LC_ALL="en_US.UTF-8"
+          bitbake-layers add-layer ../openembedded-core/meta
+          bitbake-layers add-layer ../meta-arm/meta-arm-toolchain
+          bitbake-layers add-layer ../meta-arm/meta-arm
+          bitbake-layers add-layer ../meta-neu6b
+          bitbake-layers add-layer ../meta-openembedded/meta-oe
+          bitbake-layers add-layer ../meta-openembedded/meta-python
+          bitbake-layers add-layer ../meta-openembedded/meta-networking
