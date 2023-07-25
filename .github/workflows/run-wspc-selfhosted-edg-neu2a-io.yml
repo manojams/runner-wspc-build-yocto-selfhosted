@@ -120,8 +120,8 @@ jobs:
           bitbake core-image-minimal    
                 
       - name: Upload output artifacts
-        uses: actions/upload-artifact@v3
+        uses: xresloader/upload-to-github-release@v1
         with:
           name: core-image-minimal neu2a-io Images
           path: ${{ runner.workspace }}/neu2aYctBuild/build/tmp-glibc/deploy/images/neu2a-io/
-          archive-format: none
+          draft: false
