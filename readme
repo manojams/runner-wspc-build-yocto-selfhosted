@@ -1,0 +1,43 @@
+1) Create a yml file in our repo , to run yocto setup 
+
+1) after creating yml file in our repo , to setup the self-hosted runners  in our personal computer using the following steps :
+
+https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners
+
+3) after adding above steps , its tries to listen the jobs using github actions for the yaml file , which will be initiated from our repo. 
+
+Log from  self-hosted runner :-
+
+# Authentication
+
+
+√ Connected to GitHub
+
+# Runner Registration
+
+Enter the name of the runner group to add this runner to: [press Enter for Default] 
+
+Enter the name of runner: [press Enter for manoj-ThinkPad-E14-Gen-3] 
+
+This runner will have the following labels: 'self-hosted', 'Linux', 'X64' 
+Enter any additional labels (ex. label-1,label-2): [press Enter to skip] 
+
+√ Runner successfully added
+√ Runner connection is good
+
+# Runner settings
+
+Enter name of work folder: [press Enter for _work] runner-wspc-neu2a
+
+√ Settings Saved.
+
+manoj:actions-runner$ ./run.sh
+
+√ Connected to GitHub
+
+Current runner version: '2.306.0'
+2023-07-25 06:42:03Z: Listening for Jobs
+2023-07-25 06:42:26Z: Running job: neu2a yocto Build
+2023-07-25 06:48:04Z: Job neu2a yocto Build completed with result: Succeeded
+
+4) To see the output logs and Artifacts uploaded to repo , go to  'Actions' field in  repo 
