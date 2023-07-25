@@ -32,16 +32,16 @@ jobs:
             ls
           fi
 
-
-      - name: Change to neu2aYctBuild directory
-        run: |
-          cd ${{ runner.workspace }}/neu2aYctBuild
-
       - name: Clone Yocto Poky repository
         run: |
           cd ${{ runner.workspace }}/neu2aYctBuild
+          pwd
+          ls
           if [ ! -d "neu2aYctBuild/poky" ]; then
-            git clone git://git.yoctoproject.org/poky.git  
+            git clone git://git.yoctoproject.org/poky.git
+          else
+           pwd
+           ls
           fi
 
       - name: Clone bitbake repository
