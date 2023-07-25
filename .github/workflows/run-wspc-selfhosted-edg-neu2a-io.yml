@@ -125,6 +125,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: core-image-minimal neu2a-io Images
-          path: ${{ runner.workspace }}/neu2aYctBuild/build/tmp-glibc/deploy/images/neu2a-io/
-          file: ./*
-          draft: false
+          file: ${{ runner.workspace }}/neu2aYctBuild/build/tmp-glibc/deploy/images/neu2a-io/
