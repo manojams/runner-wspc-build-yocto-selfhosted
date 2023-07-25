@@ -96,7 +96,7 @@ jobs:
           
       - name: bitbake uboot-neu2a 
         run: |
-          cd neu2aYctBuild
+          cd ${{ runner.workspace }}/neu2aYctBuild
           source openembedded-core/oe-init-build-env build
           export LC_ALL="en_US.UTF-8"
           bitbake u-boot-neu2a
