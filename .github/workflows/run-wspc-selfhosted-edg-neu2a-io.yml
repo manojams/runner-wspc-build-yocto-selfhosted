@@ -114,7 +114,7 @@ jobs:
             
       - name: bitbake core-image-minimal
         run: |
-          cd neu2aYctBuild
+          cd ${{ runner.workspace }}/neu2aYctBuild
           source openembedded-core/oe-init-build-env build
           export LC_ALL="en_US.UTF-8"
           bitbake core-image-minimal    
