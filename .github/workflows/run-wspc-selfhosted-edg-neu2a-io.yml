@@ -21,12 +21,17 @@ jobs:
           pwd
           ls
 
-        # Set up the build directory in the runner's workspace
-      - name: Set up build directory
+# Check if the neu2aYctBuild directory exists in the runner's workspace
+      - name: Check if neu2aYctBuild directory exists or create it
         run: |
-          mkdir -p ${{ runner.workspace }}/neu2aYctBuild
-          cp -r * ${{ runner.workspace }}/neu2aYctBuild/
-        continue-on-error: true
+          if [ ! -d "${{ runner.workspace }}/neu2aYctBuild" ]; then
+            mkdir "${{ runner.workspace }}/neu2aYctBuild"
+          else
+            cd "${{ runner.workspace }}/neu2aYctBuild"
+            pwd
+            ls
+          fi
+
 
       - name: Change to neu2aYctBuild directory
         run: |
