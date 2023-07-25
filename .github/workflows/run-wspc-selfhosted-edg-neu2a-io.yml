@@ -125,3 +125,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: ${{ runner.workspace }}/neu2aYctBuild/build/tmp-glibc/deploy/images/neu2a-io/
+          draft: false
