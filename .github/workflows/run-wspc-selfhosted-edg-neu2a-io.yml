@@ -35,8 +35,6 @@ jobs:
       - name: Clone Yocto Poky repository
         run: |
           cd ${{ runner.workspace }}/neu2aYctBuild
-          pwd
-          ls
           if [ ! -d "neu2aYctBuild/poky" ]; then
             git clone git://git.yoctoproject.org/poky.git
           else
