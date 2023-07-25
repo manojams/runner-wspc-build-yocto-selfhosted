@@ -124,3 +124,4 @@ jobs:
         with:
           name: core-image-minimal neu2a-io Images
           path: ${{ runner.workspace }}/neu2aYctBuild/build/tmp-glibc/deploy/images/neu2a-io/
+          archive-format: none
