@@ -118,7 +118,9 @@ jobs:
           source openembedded-core/oe-init-build-env build
           export LC_ALL="en_US.UTF-8"
           bitbake core-image-minimal    
-          
-       
-       
-       
+                
+      - name: Upload output artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: core-image-minimal neu2a-io Images
+          path: neu2aYctBuild/build/tmp-glibc/deploy/images/neu2a-io/
