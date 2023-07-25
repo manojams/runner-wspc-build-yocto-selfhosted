@@ -71,7 +71,11 @@ jobs:
         run: | 
           cd ${{ runner.workspace }}/neu2aYctBuild
           if [ ! -d "meta-neu6b" ]; then
-            git clone https://github.com/manojams/meta-neu6b.git -b kirkstone 
+            git clone https://github.com/manojams/meta-neu6b.git -b kirkstone
+          else
+            cd meta-neu6b
+            ls
+            git pull --rebase
           fi
 
 
