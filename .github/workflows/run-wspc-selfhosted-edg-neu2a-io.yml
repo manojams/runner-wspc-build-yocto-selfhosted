@@ -37,43 +37,40 @@ jobs:
           cd ${{ runner.workspace }}/neu2aYctBuild
           if [ ! -d "poky" ]; then
             git clone git://git.yoctoproject.org/poky.git
-          else
-           pwd
-           ls
           fi
 
       - name: Clone bitbake repository
         run: |
           cd ${{ runner.workspace }}/neu2aYctBuild
-          if [ ! -d "neu2aYctBuild/bitbake" ]; then
+          if [ ! -d "bitbake" ]; then
             git clone git://git.openembedded.org/bitbake -b master 
           fi
 
       - name: Clone openembedded-core repository
         run: |
           cd ${{ runner.workspace }}/neu2aYctBuild
-          if [ ! -d "neu2aYctBuild/openembedded-core" ]; then
+          if [ ! -d "openembedded-core" ]; then
             git clone git://git.openembedded.org/openembedded-core -b kirkstone  
           fi
 
       - name: Clone meta-arm repository
         run: |
           cd ${{ runner.workspace }}/neu2aYctBuild
-          if [ ! -d "neu2aYctBuild/meta-arm" ]; then
+          if [ ! -d "meta-arm" ]; then
             git clone git://git.yoctoproject.org/meta-arm -b kirkstone  
           fi
 
       - name: Clone meta-openembedded repository
         run: |
           cd ${{ runner.workspace }}/neu2aYctBuild
-          if [ ! -d "neu2aYctBuild/meta-openembedded" ]; then
+          if [ ! -d "meta-openembedded" ]; then
             git clone git://git.openembedded.org/meta-openembedded -b kirkstone  
           fi
 
       - name: Clone meta-neu6b repo
         run: | 
           cd ${{ runner.workspace }}/neu2aYctBuild
-          if [ ! -d "neu2aYctBuild/meta-neu6b" ]; then
+          if [ ! -d "meta-neu6b" ]; then
             git clone https://github.com/manojams/meta-neu6b.git -b kirkstone 
           fi
 
@@ -96,3 +93,14 @@ jobs:
           bitbake-layers add-layer ../meta-openembedded/meta-oe
           bitbake-layers add-layer ../meta-openembedded/meta-python
           bitbake-layers add-layer ../meta-openembedded/meta-networking
+          
+      - name: bitbake uboot-neu2a 
+        run: |
+          cd neu2aYctBuild
+          source openembedded-core/oe-init-build-env build
+          export LC_ALL="en_US.UTF-8"
+          bitbake u-boot-neu2a
+       
+       
+       
+       
